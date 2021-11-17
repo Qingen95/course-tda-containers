@@ -1,0 +1,13 @@
+{
+  "name": "course-tda-containers",
+  "version": "1.0.0",
+  "description": "Course",
+  "scripts": {
+    "start" : "node server.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^6.0.1"
+  }
+}
