@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ws2-pod-db
+  labels:
+    name: ws2-pod-db
+spec:
+  containers:
+  - name: ws2-container-db
+    image: stackupiss/bgg-database:v1
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+    - containerPort: 3306
+
+

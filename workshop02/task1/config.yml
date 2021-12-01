@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ws2-secret
+  labels:
+    name: ws2-secret
+type: opaque
+data:
+  BGG_DB_PASSWORD: Y2hhbmdlaXQ=
+
