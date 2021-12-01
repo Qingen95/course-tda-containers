@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ws3-deploy-v2
+  labels:
+    name: ws3-deploy-v2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: ws3-pod-v2
+  template:
+    metadata:
+      name: ws3-pod-v2
+      labels:
+        name: ws3-pod-v2
+    spec:
+      containers:
+      - name: ws3-container-v2
+        image: stackupiss/bgg-backend:v2
+        imagePullPolicy: IfNotPresent
+        args:
+          - --prefix
+          - /v2
+        env:
+        - name: BGG_DB_USER
+          value: root
+        - name: BGG_DB_HOST
+          value: 10.244.0.45
+        envFrom:
+        - secretRef:
+            name: ws3-secret
+        ports:
+        - name: port-v2
+          containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws3-svc-v2
+  labels:
+    name: ws3-svc-v2
+spec:
+  type: ClusterIP
+  selector:
+    name: ws3-pod-v2
+  ports:
+  - port: 80
+    targetPort: port-v2

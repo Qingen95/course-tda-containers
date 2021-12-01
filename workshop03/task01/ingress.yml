@@ -1,0 +1,33 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ws3-ing
+  labels:
+    name: ws3-ing
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: default-backend-svc
+      port: 
+        number: 3000
+  rules:
+  - host: bgg-188.166.206.210.nip.io
+    http:
+      paths:
+      - pathType: Prefix
+        path: /v1
+        backend:
+          service:
+            name: ws3-svc-v1
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /v2
+        backend:
+          service: 
+            name: ws3-svc-v2
+            port: 
+              number: 80
+        
